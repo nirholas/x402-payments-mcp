@@ -1,0 +1,69 @@
+{
+	"$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+	"name": "io.github.nirholas/x402-mcp",
+	"title": "x402 Wallet",
+	"description": "Self-custodial x402 wallet for AI agents: pay any service in USDC or $THREE from your own key.",
+	"websiteUrl": "https://three.ws",
+	"icons": [
+		{
+			"src": "https://three.ws/three-ws-mcp-icon.svg",
+			"mimeType": "image/svg+xml",
+			"sizes": [
+				"any"
+			]
+		}
+	],
+	"repository": {
+		"url": "https://github.com/nirholas/x402-mcp",
+		"source": "github"
+	},
+	"version": "0.2.0",
+	"packages": [
+		{
+			"registryType": "npm",
+			"identifier": "@three-ws/x402-mcp",
+			"version": "0.2.0",
+			"runtimeHint": "npx",
+			"transport": {
+				"type": "stdio"
+			},
+			"environmentVariables": [
+				{
+					"name": "SOLANA_SECRET_KEY",
+					"description": "Base58 (or JSON byte-array) Solana secret key that signs payments and holds the USDC. Not needed for the read tools (find_services, inspect_endpoint, or x402_wallet with an explicit address). Treat like cash.",
+					"format": "string",
+					"isRequired": false,
+					"isSecret": true
+				},
+				{
+					"name": "SOLANA_RPC_URL",
+					"description": "Solana mainnet RPC endpoint. Defaults to the public cluster — bring your own (Helius / QuickNode / Triton) for production traffic.",
+					"format": "string",
+					"isRequired": false,
+					"default": "https://api.mainnet-beta.solana.com"
+				},
+				{
+					"name": "MAX_PAY_USD",
+					"description": "Max USD a single pay_and_call may spend. Bounds a runaway or injected payment.",
+					"format": "number",
+					"isRequired": false,
+					"default": "1"
+				},
+				{
+					"name": "REQUIRE_CONFIRM",
+					"description": "When on (default), pay_and_call refuses until re-issued with confirm:true. Set 0/false to disable the gate.",
+					"format": "boolean",
+					"isRequired": false,
+					"default": "true"
+				},
+				{
+					"name": "THREE_WS_BASE",
+					"description": "Base URL of the three.ws API that serves /api/bazaar/search for find_services. Override only when self-hosting.",
+					"format": "string",
+					"isRequired": false,
+					"default": "https://three.ws"
+				}
+			]
+		}
+	]
+}
