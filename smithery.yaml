@@ -1,0 +1,43 @@
+# Smithery deployment config for @three-ws/x402-mcp
+# https://smithery.ai/docs/config#smitheryyaml
+#
+# Self-custodial x402 buyer: search the bazaar, inspect an endpoint's price
+# without paying, and pay_and_call any x402 service in USDC or $THREE from a
+# Solana key. Read tools work with no key; only pay_and_call needs one.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      SOLANA_SECRET_KEY:
+        type: string
+        title: Solana secret key
+        description: Base58 secret key (or JSON byte array) for the paying wallet. Optional — read-only tools work without it.
+      SOLANA_RPC_URL:
+        type: string
+        title: Solana RPC URL
+        default: https://api.mainnet-beta.solana.com
+        description: HTTPS Solana RPC endpoint. Bring your own (Helius / Quicknode / Triton) for production.
+      MAX_PAY_USD:
+        type: number
+        title: Max USD per call
+        default: 1
+        description: Hard spend cap per pay_and_call, in USD.
+      REQUIRE_CONFIRM:
+        type: boolean
+        title: Require explicit confirm
+        default: true
+        description: Refuse a payment until re-issued with confirm=true.
+    required: []
+  commandFunction: |
+    (config) => ({
+      command: 'npx',
+      args: ['-y', '@three-ws/x402-mcp'],
+      env: Object.assign(
+        {},
+        config.SOLANA_SECRET_KEY ? { SOLANA_SECRET_KEY: config.SOLANA_SECRET_KEY } : {},
+        config.SOLANA_RPC_URL ? { SOLANA_RPC_URL: config.SOLANA_RPC_URL } : {},
+        config.MAX_PAY_USD != null ? { MAX_PAY_USD: String(config.MAX_PAY_USD) } : {},
+        config.REQUIRE_CONFIRM != null ? { REQUIRE_CONFIRM: String(config.REQUIRE_CONFIRM) } : {}
+      )
+    })

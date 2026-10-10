@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@three-ws/x402-mcp: Give any AI agent a self-custodial x402 wallet</title>
+<meta name="description" content="Give any AI agent a self-custodial x402 wallet. Search the live bazaar, inspect an endpoint&#39;s price without paying, and pay_and_call any x402 service in USDC or $THREE from your own Solana key — real @x402 settlement, bounded by spend caps. No custodial wallet, no account.">
+<link rel="canonical" href="https://nirholas.github.io/x402-payments-mcp/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="three.ws">
+<meta property="og:title" content="@three-ws/x402-mcp">
+<meta property="og:description" content="Give any AI agent a self-custodial x402 wallet. Search the live bazaar, inspect an endpoint&#39;s price without paying, and pay_and_call any x402 service in USDC or $THREE from your own Solana key — real @x402 settlement, bounded by spend caps. No custodial wallet, no account.">
+<meta property="og:url" content="https://nirholas.github.io/x402-payments-mcp/">
+<meta property="og:image" content="https://nirholas.github.io/x402-payments-mcp/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@three-ws/x402-mcp">
+<meta name="twitter:description" content="Give any AI agent a self-custodial x402 wallet. Search the live bazaar, inspect an endpoint&#39;s price without paying, and pay_and_call any x402 service in USDC or $THREE from your own Solana key — real @x402 settlement, bounded by spend caps. No custodial wallet, no account.">
+<meta name="twitter:image" content="https://nirholas.github.io/x402-payments-mcp/og.png">
+<meta name="keywords" content="mcp, model-context-protocol, three.ws, x402, solana, usdc, three, payments, agent-payments, bazaar, ai-agent, mcp-server, ai-agents">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="icon" href="https://three.ws/three-ws-mcp-icon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"@three-ws/x402-mcp","description":"Give any AI agent a self-custodial x402 wallet. Search the live bazaar, inspect an endpoint's price without paying, and pay_and_call any x402 service in USDC or $THREE from your own Solana key — real @x402 settlement, bounded by spend caps. No custodial wallet, no account.","codeRepository":"https://github.com/nirholas/x402-payments-mcp","programmingLanguage":"JavaScript","license":"https://spdx.org/licenses/Apache-2.0.html","version":"0.2.3","url":"https://nirholas.github.io/x402-payments-mcp/","author":{"@type":"Organization","name":"three.ws","url":"https://three.ws"},"keywords":"mcp, model-context-protocol, three.ws, x402, solana, usdc, three, payments, agent-payments, bazaar, ai-agent, mcp-server, ai-agents"}</script>
+<style>:root{--bg:#fff;--fg:#111418;--mut:#586069;--line:#e3e6ea;--acc:#2563eb;--code:#f4f6f8;--card:#fafbfc}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d10;--fg:#e8eaed;--mut:#9aa3ad;--line:#232830;--acc:#6ea0ff;--code:#14181d;--card:#10141a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc)}a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+header.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.bar nav{margin-left:auto;display:flex;gap:16px;font-size:14px}
+.bar nav a{color:var(--mut);text-decoration:none;transition:color .15s}.bar nav a:hover{color:var(--fg)}
+.hero{max-width:1100px;margin:0 auto;padding:48px 16px 24px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:70ch;font-size:18px;margin:0 0 24px}
+.install{display:flex;align-items:center;gap:8px;max-width:620px;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:6px 6px 6px 14px}
+.install code{flex:1;overflow-x:auto;white-space:nowrap;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}
+.install button{border:0;background:var(--acc);color:#fff;border-radius:7px;padding:8px 14px;font:600 13px system-ui;cursor:pointer;transition:transform .12s,opacity .12s}
+.install button:hover{opacity:.9}.install button:active{transform:scale(.96)}
+.cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.cta a{padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--fg);transition:border-color .15s,transform .15s}
+.cta a:hover{border-color:var(--acc);transform:translateY(-1px)}.cta a.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.layout{max-width:1100px;margin:0 auto;padding:8px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px}
+@media(max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+.toc{position:sticky;top:76px;align-self:start;font-size:14px;border-left:1px solid var(--line);padding-left:16px}
+.toc p{margin:0 0 8px;font-weight:700;color:var(--mut);text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:6px 0}.toc a{color:var(--mut);text-decoration:none}.toc a:hover{color:var(--fg)}
+main{min-width:0;overflow-wrap:anywhere}main pre code{overflow-wrap:normal}main img{max-width:100%;height:auto}
+main h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+.anchor{margin-left:-1.1em;padding-right:.4em;text-decoration:none;opacity:0;color:var(--mut)}h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.5}
+code{font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:.15em .35em;border-radius:5px}pre code{background:none;padding:0}
+table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}th{background:var(--card)}
+blockquote{margin:1em 0;padding:.2em 1em;border-left:4px solid var(--line);color:var(--mut)}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+.foot-in{max-width:1100px;margin:0 auto;padding:24px 16px;display:flex;gap:16px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+<a class="brand" href="https://nirholas.github.io/x402-payments-mcp/">@three-ws/x402-mcp</a>
+<nav aria-label="Project links"><a href="https://github.com/nirholas/x402-payments-mcp">GitHub</a><a href="https://www.npmjs.com/package/@three-ws/x402-mcp">npm</a><a href="llms.txt">llms.txt</a><a href="https://three.ws">three.ws</a></nav>
+</div></header>
+<section class="hero">
+<h1>@three-ws/x402-mcp</h1>
+<p>Give any AI agent a self-custodial x402 wallet. Search the live bazaar, inspect an endpoint&#39;s price without paying, and pay_and_call any x402 service in USDC or $THREE from your own Solana key — real @x402 settlement, bounded by spend caps. No custodial wallet, no account.</p>
+<div class="install" role="group" aria-label="Install command"><code>npx -y @three-ws/x402-mcp</code><button type="button" data-copy="npx -y @three-ws/x402-mcp">Copy</button></div>
+<div class="cta"><a class="pri" href="https://github.com/nirholas/x402-payments-mcp">View on GitHub</a><a href="https://github.com/nirholas/x402-payments-mcp/stargazers">Star the repo</a><a href="https://registry.modelcontextprotocol.io/?q=io.github.nirholas%2Fx402-mcp">MCP Registry</a></div>
+</section>
+<div class="layout">
+<main id="content"><p align="center"><strong>Give any AI agent a self-custodial x402 wallet — discover, inspect, and pay any paid service in USDC from your own Solana key.</strong></p><p align="center">
+  <a href="https://www.npmjs.com/package/@three-ws/x402-mcp"><img alt="npm" src="https://img.shields.io/npm/v/@three-ws/x402-mcp?logo=npm&color=cb3837"></a>
+  <img alt="license" src="https://img.shields.io/npm/l/@three-ws/x402-mcp?color=3b82f6">
+  <img alt="node" src="https://img.shields.io/node/v/@three-ws/x402-mcp?color=339933&logo=node.js">
+  <a href="https://registry.modelcontextprotocol.io/?q=io.github.nirholas"><img alt="MCP Registry" src="https://img.shields.io/badge/MCP%20Registry-io.github.nirholas-0ea5e9"></a>
+  <a href="https://three.ws"><img alt="three.ws" src="https://img.shields.io/badge/built%20by-three.ws-000"></a>
+</p><hr>
+<blockquote>
+<p>A <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server that turns any AI assistant into an autonomous economic agent on the <a href="https://x402.org">x402</a> network. Search the live bazaar for paid services, read an endpoint&#39;s price <strong>before</strong> committing money, and <code>pay_and_call</code> any x402 service in USDC — settled on Solana with <strong>your own key</strong>, never a custodial wallet.</p>
+</blockquote>
+<p>This is the <em>buyer</em> side of the three.ws agent economy. The payment dance and Solana <code>exact</code>-scheme signing are handled by the real <code>@x402/*</code> libraries — nothing is mocked.</p>
+<h2 id="install"><a class="anchor" href="#install" aria-label="Link to this section">#</a>Install</h2>
+<pre><code class="language-bash">npm install @three-ws/x402-mcp
+</code></pre>
+<p>Or run with <code>npx</code>:</p>
+<pre><code class="language-bash">SOLANA_SECRET_KEY=&lt;base58&gt; npx @three-ws/x402-mcp
+</code></pre>
+<h2 id="quick-start"><a class="anchor" href="#quick-start" aria-label="Link to this section">#</a>Quick start</h2>
+<p><strong>Claude Code</strong>, one line:</p>
+<pre><code class="language-bash">claude mcp add x402 --env SOLANA_SECRET_KEY=&lt;base58&gt; -- npx -y @three-ws/x402-mcp
+</code></pre>
+<p><strong>Claude Desktop / Cursor</strong> (<code>claude_desktop_config.json</code> or <code>mcp.json</code>):</p>
+<pre><code class="language-json">{
+	&quot;mcpServers&quot;: {
+		&quot;x402&quot;: {
+			&quot;command&quot;: &quot;npx&quot;,
+			&quot;args&quot;: [&quot;-y&quot;, &quot;@three-ws/x402-mcp&quot;],
+			&quot;env&quot;: {
+				&quot;SOLANA_SECRET_KEY&quot;: &quot;&lt;base58 secret of the wallet that holds USDC&gt;&quot;,
+				&quot;SOLANA_RPC_URL&quot;: &quot;https://your-rpc-provider&quot;,
+				&quot;MAX_PAY_USD&quot;: &quot;1&quot;
+			}
+		}
+	}
+}
+</code></pre>
+<p><code>SOLANA_SECRET_KEY</code> is only needed to <strong>spend</strong> (<code>pay_and_call</code>, and <code>x402_wallet</code> defaulting to your wallet). <code>find_services</code> and <code>inspect_endpoint</code> work with no key.</p>
+<h2 id="tools"><a class="anchor" href="#tools" aria-label="Link to this section">#</a>Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Type</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>x402_wallet</code></td>
+<td>read-only</td>
+<td>A wallet&#39;s address + live SOL/USDC balance. Defaults to your signer wallet — confirm funds before paying.</td>
+</tr>
+<tr>
+<td><code>find_services</code></td>
+<td>read-only</td>
+<td>Search the live x402 bazaar (PayAI + Coinbase CDP) for paid HTTP/MCP services with prices.</td>
+</tr>
+<tr>
+<td><code>inspect_endpoint</code></td>
+<td>read-only</td>
+<td>Read any endpoint&#39;s 402 payment requirements (scheme, network, asset, price, pay-to) <strong>without paying</strong>.</td>
+</tr>
+<tr>
+<td><code>pay_and_call</code></td>
+<td><strong>execution</strong></td>
+<td>Pay an x402 endpoint in USDC from your Solana key and return its result. Bounded by <code>MAX_PAY_USD</code>.</td>
+</tr>
+</tbody></table>
+<h3 id="safety"><a class="anchor" href="#safety" aria-label="Link to this section">#</a>Safety</h3>
+<p><code>pay_and_call</code> carries <code>destructiveHint: true</code>, so annotation-aware clients (Claude Code, Claude Desktop, Cursor) prompt before running it. Beyond the client hint, every payment is bounded server-side: it <strong>probes the 402 first</strong> and refuses if the price exceeds <code>max_usd</code> or <code>MAX_PAY_USD</code> (default $1) <strong>before any money moves</strong>, and with <code>REQUIRE_CONFIRM</code> on (default) the call refuses until re-issued with <code>confirm: true</code>. Only the Solana (<code>solana:*</code>) <code>exact</code>-scheme requirement is settled — with the key you control.</p>
+<h3 id="input-parameters"><a class="anchor" href="#input-parameters" aria-label="Link to this section">#</a>Input parameters</h3>
+<p><strong><code>x402_wallet</code></strong> — <code>address</code> (optional base58; defaults to the signer wallet).</p>
+<p><strong><code>find_services</code></strong> — <code>query</code> (required), <code>type</code> (<code>http</code> | <code>mcp</code>, default <code>http</code>), <code>network</code> (CAIP-2 filter), <code>max_price_usdc</code>, <code>limit</code> (1–100).</p>
+<p><strong><code>inspect_endpoint</code></strong> — <code>url</code> (required), <code>method</code> (<code>GET</code> | <code>POST</code>), <code>body</code> (object).</p>
+<p><strong><code>pay_and_call</code></strong>: <code>url</code> (required), <code>method</code> (<code>GET</code> | <code>POST</code>), <code>body</code> (object), <code>max_usd</code> (lowers the cap for this call), <code>secret</code> (per-call signer override), <code>confirm</code> (must be <code>true</code> when <code>REQUIRE_CONFIRM</code> is on), <code>session_token</code>, <code>token</code>, <code>idempotency_key</code>.</p>
+<p>It has two settlement modes:</p>
+<ul>
+<li><strong>Self-custodial (default).</strong> Signs with <code>SOLANA_SECRET_KEY</code>, or the per-call <code>secret</code>. You hold the key.</li>
+<li><strong>Session-governed.</strong> Pass <code>session_token</code>, a <a href="https://github.com/nirholas/x402-payments-mcp/blob/main/./../docs/payment-sessions.md">three.ws Payment Session</a> token, and the platform wallet signs on your behalf while enforcing that session&#39;s budget, host allowlist, and per-transaction cap. No private key needed. Solana USDC and Base USDC sessions are both supported, and <code>secret</code> and <code>token</code> are ignored in this mode.</li>
+</ul>
+<p><code>token</code> selects the settlement asset: <code>usdc</code> (default), or <code>three</code> for the $THREE platform token when the endpoint advertises it. <code>idempotency_key</code> deduplicates a call, which is recommended with <code>session_token</code> so a retry cannot double-charge.</p>
+<h2 id="example"><a class="anchor" href="#example" aria-label="Link to this section">#</a>Example</h2>
+<pre><code class="language-jsonc">// inspect_endpoint — what does it cost? (no payment)
+&gt; { &quot;url&quot;: &quot;https://three.ws/api/x402/vanity?prefix=ab&quot; }
+{
+  &quot;ok&quot;: true, &quot;paid&quot;: true,
+  &quot;accepts&quot;: [
+    { &quot;scheme&quot;: &quot;exact&quot;, &quot;network&quot;: &quot;solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp&quot;, &quot;asset&quot;: &quot;EPjFW…&quot;, &quot;price&quot;: 50000 }
+  ],
+  &quot;payable_with_this_wallet&quot;: true
+}
+
+// pay_and_call — confirm:true required by default
+&gt; { &quot;url&quot;: &quot;https://three.ws/api/x402/vanity?prefix=ab&quot;, &quot;confirm&quot;: true }
+{ &quot;ok&quot;: true, &quot;paid&quot;: true, &quot;payer&quot;: &quot;Gx5E…&quot;, &quot;price_usd&quot;: 0.05, &quot;settlement&quot;: { … }, &quot;result&quot;: { … } }
+</code></pre>
+<h2 id="examples"><a class="anchor" href="#examples" aria-label="Link to this section">#</a>Examples</h2>
+<p>Runnable, no-payment examples live in <a href="https://github.com/nirholas/x402-payments-mcp/blob/main/examples"><code>examples/</code></a>:</p>
+<pre><code class="language-bash">node examples/list-tools.mjs      # every tool with its full input schema
+node examples/inspect-price.mjs   # find_services + inspect_endpoint on live data
+</code></pre>
+<p>Both spawn this server over stdio and hit the real bazaar. Neither reads a key or
+calls <code>pay_and_call</code>, so nothing is signed and nothing is spent. See
+<a href="https://github.com/nirholas/x402-payments-mcp/blob/main/examples/README.md"><code>examples/README.md</code></a> for expected output.</p>
+<h2 id="requirements"><a class="anchor" href="#requirements" aria-label="Link to this section">#</a>Requirements</h2>
+<ul>
+<li><strong>Node.js &gt;= 20.</strong></li>
+<li>A Solana mainnet RPC endpoint (<code>https</code>; only <code>http://localhost</code> is allowed for dev). Public cluster works for reads; bring your own for payment traffic.</li>
+<li>To pay: a Solana wallet holding USDC, as a base58 <code>SOLANA_SECRET_KEY</code> (or per-call <code>secret</code>).</li>
+</ul>
+<h3 id="environment-variables"><a class="anchor" href="#environment-variables" aria-label="Link to this section">#</a>Environment variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SOLANA_SECRET_KEY</code></td>
+<td>to pay only</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SOLANA_RPC_URL</code></td>
+<td>no</td>
+<td><code>https://api.mainnet-beta.solana.com</code></td>
+</tr>
+<tr>
+<td><code>MAX_PAY_USD</code></td>
+<td>no</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>REQUIRE_CONFIRM</code></td>
+<td>no</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>THREE_WS_BASE</code></td>
+<td>no</td>
+<td><code>https://three.ws</code></td>
+</tr>
+</tbody></table>
+<h2 id="links"><a class="anchor" href="#links" aria-label="Link to this section">#</a>Links</h2>
+<ul>
+<li>Homepage: <a href="https://three.ws">https://three.ws</a></li>
+<li>MCP catalog: <a href="https://three.ws/docs/mcp">https://three.ws/docs/mcp</a></li>
+<li>Changelog: <a href="https://three.ws/changelog">https://three.ws/changelog</a></li>
+<li>Issues: <a href="https://github.com/nirholas/three.ws/issues">https://github.com/nirholas/three.ws/issues</a></li>
+<li>License: Apache-2.0, see <a href="https://github.com/nirholas/x402-payments-mcp/blob/main/LICENSE">LICENSE</a></li>
+</ul>
+<hr>
+<p align="center">
+  <sub>
+    Part of the <a href="https://three.ws">three.ws</a> SDK suite — 3D AI agents, on-chain identity, and agent payments.<br/>
+    <a href="https://three.ws">Website</a> · <a href="https://three.ws/changelog">Changelog</a> · <a href="https://github.com/nirholas/three.ws">GitHub</a>
+  </sub>
+</p>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#install">Install</a></li><li><a href="#quick-start">Quick start</a></li><li><a href="#tools">Tools</a></li><li><a href="#example">Example</a></li><li><a href="#examples">Examples</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#links">Links</a></li></ul></nav>
+</div>
+<footer><div class="foot-in"><span>Apache-2.0 licensed</span><a href="https://github.com/nirholas/x402-payments-mcp/issues">Issues</a><a href="https://github.com/nirholas/x402-payments-mcp/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/nirholas/x402-payments-mcp/security/policy">Security</a><a href="https://three.ws">Part of three.ws</a></div></footer>
+<script>document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+var t=b.getAttribute('data-copy');var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1400)};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}
+else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}a.remove()}})});</script>
+</body>
+</html>

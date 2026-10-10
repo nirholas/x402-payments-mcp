@@ -1,0 +1,20 @@
+# @three-ws/x402-mcp
+
+> Give any AI agent a self-custodial x402 wallet. Search the live bazaar, inspect an endpoint's price without paying, and pay_and_call any x402 service in USDC or $THREE from your own Solana key — real @x402 settlement, bounded by spend caps. No custodial wallet, no account.
+
+@three-ws/x402-mcp is a Model Context Protocol server from three.ws. Install: `npx -y @three-ws/x402-mcp`.
+
+## Docs
+
+- [README](https://github.com/nirholas/x402-payments-mcp/blob/main/README.md): install, configuration, full reference
+- [Documentation site](https://nirholas.github.io/x402-payments-mcp/): the README as a web page
+- [Full text for LLMs](https://nirholas.github.io/x402-payments-mcp/llms-full.txt): README inlined
+- [AGENTS.md](https://github.com/nirholas/x402-payments-mcp/blob/main/AGENTS.md): guidance for coding agents
+
+## Project
+
+- [Source](https://github.com/nirholas/x402-payments-mcp)
+- [npm](https://www.npmjs.com/package/@three-ws/x402-mcp)
+- [three.ws](https://three.ws): the platform this is part of
+- [Issues](https://github.com/nirholas/x402-payments-mcp/issues)
+- [MCP Registry](https://registry.modelcontextprotocol.io/?q=io.github.nirholas%2Fx402-mcp)
