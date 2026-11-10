@@ -1,0 +1,20 @@
+{
+  "name": "x402-payments-mcp",
+  "version": "0.2.3",
+  "description": "Search the x402 bazaar, inspect an endpoint's price without paying, and pay and call it in USDC or $THREE from your own Solana key, bounded by spend caps.",
+  "author": {
+    "name": "nirholas"
+  },
+  "repository": "https://github.com/nirholas/x402-payments-mcp",
+  "homepage": "https://github.com/nirholas/x402-payments-mcp",
+  "license": "Apache-2.0",
+  "keywords": [
+    "mcp",
+    "x402",
+    "payments",
+    "solana",
+    "usdc",
+    "bazaar",
+    "agent-payments"
+  ]
+}
