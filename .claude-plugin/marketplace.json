@@ -1,0 +1,22 @@
+{
+  "name": "x402-payments-mcp",
+  "owner": {
+    "name": "nirholas"
+  },
+  "description": "MCP server giving an agent a self-custodial x402 wallet with spend caps and a confirmation gate.",
+  "plugins": [
+    {
+      "name": "x402-payments-mcp",
+      "source": "./plugins/x402-payments-mcp",
+      "description": "Search the x402 bazaar, inspect an endpoint's price without paying, and pay and call it in USDC or $THREE from your own Solana key, bounded by spend caps.",
+      "category": "finance",
+      "tags": [
+        "x402",
+        "payments",
+        "solana",
+        "usdc",
+        "mcp"
+      ]
+    }
+  ]
+}

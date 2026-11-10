@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "x402-payments": {
+      "command": "npx",
+      "args": ["-y", "-p", "@three-ws/x402-mcp", "x402-mcp"]
+    }
+  }
+}
